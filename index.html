@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgeFinder</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100%;
+        }
+
+        .label {
+            width: auto;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="label">Type birth date:</div>
+    <input id="date" type="date" style="text-align: center;">
+    <div id="age" style="width: 200%;">Invalid date.</div>
+    <script>
+        document.getElementById("date").addEventListener("change", function () {
+            let birthDate = new Date(this.value);
+            if (birthDate.toString() === "Invalid Date") {
+                document.getElementById("age").textContent = "Invalid date.";
+                return;
+            }
+            let today = new Date();
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            console.log(today.getMonth(), birthDate.getMonth());
+            let days = today.getDate() - birthDate.getDate();
+            if (days < 0) {
+                months--;
+                days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            document.getElementById("age").innerHTML = `Calculated age is ${years} years ${months} months and ${days} days.`;
+        });
+        //TODO Set interval to update age every day.
+    </script>
+</body>
+
+</html>
