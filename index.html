@@ -20,6 +20,56 @@
             width: auto;
             white-space: nowrap;
         }
+
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+
+            .label,
+            #date,
+            #age {
+                font-size: 5px;
+            }
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+
+            .label,
+            #date,
+            #age {
+                font-size: 16px;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+
+            .label,
+            #date,
+            #age {
+                font-size: 20px;
+            }
+        }
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+
+            .label,
+            #date,
+            #age {
+                font-size: 22px;
+            }
+        }
+
+        /* Extra large devices (large laptops and desktops, 1200px and up) */
+        @media only screen and (min-width: 1200px) {
+
+            .label,
+            #date,
+            #age {
+                font-size: 22px;
+            }
+        }
     </style>
 </head>
 
@@ -46,7 +96,7 @@
                 years--;
                 months += 12;
             }
-            document.getElementById("age").textContent = `Calculated age is ${years} years ${months} months and ${days} days.`;
+            document.getElementById("age").textContent = `Calculated age is ${years} years and ${months} months and ${days} days.`;
         }
         document.getElementById("date").addEventListener("change", calculateAge);
         function setMidnightInterval() {
