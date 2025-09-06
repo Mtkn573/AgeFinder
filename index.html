@@ -1,101 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>AgeFinder</title>
     <style>
-
         html,
         body {
             margin: 0;
             padding: 0;
+            height: 100%;
             display: flex;
-            flex-direction: column;
             justify-content: flex-end;
             align-items: center;
-            height: 100%;
+            flex-direction: column;
+            font-size: 13px;
         }
-
-
-        .label {
-            width: auto;
-            white-space: nowrap;
-        }
-
-        /* Extra small devices (phones, 600px and down) */
-        @media only screen and (max-width: 600px) {
-
-            .label,
-            #age {
-                font-size: 4px;
-            }
-            #date {
-                font-size: 7px;
-            }
-        }
-
-        /* Small devices (portrait tablets and large phones, 600px and up) */
-        @media only screen and (min-width: 600px) {
-
-            .label,
-            #date,
-            #age {
-                font-size: 16px;
-            }
-        }
-
-        /* Medium devices (landscape tablets, 768px and up) */
-        @media only screen and (min-width: 768px) {
-
-            .label,
-            #date,
-            #age {
-                font-size: 16px;
-            }
-        }
-
-        /* Large devices (laptops/desktops, 992px and up) */
-        @media only screen and (min-width: 992px) {
-
-            .label,
-            #date,
-            #age {
-                font-size: 22px;
-            }
-        }
-
         /* Extra large devices (large laptops and desktops, 1200px and up) */
         @media only screen and (min-width: 1200px) {
 
             .label,
             #date,
             #age {
-                font-size: 22px;
+                font-size: 42px;
             }
         }
     </style>
 </head>
-
 <body>
 <img id="arrow" src="arrow.png" style="display: none;">
-<canvas id="canvas" width="350%" height="670px"></canvas>
-<div style="display: flex; ">
-    <div class="label">Type birth date:</div>
+<canvas id="canvas" width="350%" height="570px"></canvas>
+<div style="display: flex; flex-direction: column;justify-content: flex-end;">
+    <div class="label">Type birthday date:</div>
     <input id="date" type="date" style="text-align: center;">
     <div id="age" style="width: 200%;">Invalid date.</div>
 </div>
-
-<img id="changeToPolish" src="polandFlag.jpg" style="position: fixed; bottom: 0;left: 0;cursor: pointer;">
+<img id="changeToPolish" src="polandFlag.jpg" style="position: fixed; bottom: 0;left: 0;cursor: pointer;width: 3%;">
 <script>
     document.getElementById(`changeToPolish`).addEventListener(`click`, function () {
         window.location.href = `polish.html`
     })
     arrowY = 0
     direction = 1
-    maxY = 100
-    minY = 0
+    maxY = 10
+    minY = -100
 
     function animateArrow() {
         canvas = document.getElementById("canvas")
@@ -122,7 +72,6 @@
             })
         }
     })
-
     function calculateAge() {
         let birthDate = new Date(document.getElementById("date").value);
         if (birthDate.toString() === "Invalid Date") {
@@ -143,13 +92,16 @@
         }
         document.getElementById("age").textContent = `Calculated age is ${years} years and ${months} months and ${days} days.`;
     }
+
     document.getElementById("date").addEventListener("change", calculateAge);
+
     function setMidnightInterval() {
         function calculateNextMidnight() {
             let now = new Date();
             let midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
             return midnight - now;
         }
+
         function setDailyInterval() {
             const timeToMidnight = calculateNextMidnight();
             setTimeout(function () {
@@ -157,10 +109,11 @@
                 setDailyInterval();
             }, timeToMidnight);
         }
+
         setDailyInterval();
     }
+
     setMidnightInterval();
 </script>
 </body>
-
 </html>
