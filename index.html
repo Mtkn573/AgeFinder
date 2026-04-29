@@ -55,6 +55,7 @@
                     document.getElementById(`age`).textContent = "Nieprawidłowa data."
                 }
                 document.documentElement.setAttribute(`lang`, `pl`);
+                localStorage.setItem('language', 'pl');
                 calculateAge()
             }
             else {
@@ -65,6 +66,7 @@
                     document.getElementById(`age`).textContent = "Invalid date."
                 }
                 document.documentElement.setAttribute(`lang`, `en`);
+                localStorage.setItem('language', 'en');
                 calculateAge()
             }
         })
@@ -89,6 +91,20 @@
         }
 
         window.addEventListener("DOMContentLoaded", function () {
+            const savedLang = localStorage.getItem('language');
+            if (savedLang === 'pl') {
+                document.getElementById(`changeLanguage`).src = `unitedStatesFlag.jpg`;
+                document.getElementById(`label`).textContent = `Wpisz datę urodzenia:`;
+                document.getElementById(`language`).textContent = `Język:`;
+                document.documentElement.setAttribute(`lang`, `pl`);
+                document.getElementById(`age`).textContent = "Nieprawidłowa data.";
+            } else {
+                document.getElementById(`changeLanguage`).src = `polandFlag.jpg`;
+                document.getElementById(`label`).textContent = `Type birthday date:`;
+                document.getElementById(`language`).textContent = `Language:`;
+                document.getElementById(`age`).textContent = "Invalid date.";
+                document.documentElement.setAttribute(`lang`, `en`);
+            }
             arrow = document.getElementById("arrow")
             if (arrow.complete && arrow.naturalWidth != 0) {
                 animateArrow()
@@ -101,7 +117,7 @@
         function calculateAge() {
             let birthDate = new Date(document.getElementById("date").value);
             if (birthDate.toString() === "Invalid Date") {
-                if (document.getElementById(`changeLanguage`).src.includes(`polandFlag.jpg`)) {
+                if (document.documentElement.lang == 'en') {
                     document.getElementById("age").textContent = "Invalid date.";
                 }
                 else {
@@ -121,7 +137,7 @@
                 years--;
                 months += 12;
             }
-            if (document.getElementById(`changeLanguage`).src.includes(`polandFlag.jpg`)) {
+            if (document.documentElement.lang == 'en') {
                 document.getElementById("age").textContent = `Calculated age is I guess ${years} years and I guess ${months} months and I guess ${days} days.`;
             }
             else {
